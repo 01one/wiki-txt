@@ -1,0 +1,56 @@
+name: wiki-txt
+summary: Download Wikipedia articles in TXT format
+description: |
+  Wiki TXT is a simple utility that allows you to download and save Wikipedia articles as plain text files.
+  It uses the Wikipedia API to fetch content and provides an easy-to-use interface.
+  
+  Features:
+  - Download articles in TXT format
+  - Save files directly to your downloads folder
+  - Lightweight and fast
+  
+  Useful for research, offline reading
+
+version: '1.0'
+base: core22
+confinement: strict
+
+grade: stable
+adopt-info: wiki-txt
+
+license: MIT
+
+parts:
+  wiki-txt:
+    plugin: python
+    source: .
+    python-packages:
+      - requests
+    stage-packages:
+      - python3-gi
+    override-build: |
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta/gui
+      mv wiki-txt.py $SNAPCRAFT_PART_INSTALL/bin/wiki-txt
+      chmod +x $SNAPCRAFT_PART_INSTALL/bin/wiki-txt
+      cp snap/gui/wiki-txt.desktop $SNAPCRAFT_PART_INSTALL/meta/gui/wiki-txt.desktop
+      cp snap/gui/wiki-txt-icon.png $SNAPCRAFT_PART_INSTALL/meta/gui/wiki-txt-icon.png
+
+apps:
+  wiki-txt:
+    command: bin/wiki-txt
+    extensions: [gnome]
+    environment:
+      GTK_IM_MODULE: none
+      XDG_DOWNLOAD_DIR: $HOME/Downloads
+      PYTHONPATH: $SNAP/usr/lib/python3/dist-packages
+      LD_LIBRARY_PATH: $SNAP/usr/lib:$SNAP/usr/lib/x86_64-linux-gnu
+      GTK_PATH: $SNAP/usr/lib/gtk-4.0
+    plugs:
+      - network
+      - home
+      - desktop
+      - x11
+      - wayland
+    desktop: meta/gui/wiki-txt.desktop

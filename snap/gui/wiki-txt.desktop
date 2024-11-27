@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Wiki TXT
+Comment=Download Wikipedia articles in TXT format
+Exec=wiki-txt
+Icon=${SNAP}/meta/gui/wiki-txt-icon.png
+Terminal=false
+Type=Application
+Categories=Utility;
