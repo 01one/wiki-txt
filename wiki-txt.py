@@ -11,7 +11,7 @@ from gi.repository import Gtk, Gio
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"
 
 headers = {
-    "User-Agent": "WikiTxt/1.0.1 (desktop app)"
+    "User-Agent": "WikiTxt/1.0.2 (desktop app)"
 }
 
 
