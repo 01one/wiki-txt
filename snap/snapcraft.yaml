@@ -11,7 +11,7 @@ description: |
   
   Useful for research, offline reading
 
-version: '1.0'
+version: '1.0.1'
 base: core22
 confinement: strict
 
