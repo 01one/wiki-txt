@@ -10,6 +10,10 @@ from gi.repository import Gtk, Gio
 
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"
 
+headers = {
+    "User-Agent": "WikiTxt/1.0.1 (desktop app)"
+}
+
 
 def get_wikipedia_content(title):
 	params = {
@@ -19,7 +23,7 @@ def get_wikipedia_content(title):
 		"titles": title,
 		"explaintext": True,
 	}
-	response = requests.get(WIKIPEDIA_API_URL, params=params)
+	response = requests.get(WIKIPEDIA_API_URL, params=params, headers=headers)
 	data = response.json()
 	page_id = list(data["query"]["pages"].keys())[0]
 	return data["query"]["pages"][page_id].get("extract", "")
